@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/emotion_wheel/emotion_wheel.iml" filepath="$PROJECT_DIR$/emotion_wheel/emotion_wheel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emotion_wheel/android/emotion_wheel_android.iml" filepath="$PROJECT_DIR$/emotion_wheel/android/emotion_wheel_android.iml" />
     </modules>
   </component>
 </project>
