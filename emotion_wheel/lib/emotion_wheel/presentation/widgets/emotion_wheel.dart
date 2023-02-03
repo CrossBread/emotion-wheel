@@ -1,4 +1,6 @@
+import 'package:emotion_wheel/emotion_wheel/domain/entities/feeling_wheel_emotions.dart';
 import 'package:flutter/material.dart';
+import 'package:graphic/graphic.dart';
 
 const heatmapData = [
   [0, 0, 10],
@@ -54,93 +56,70 @@ const heatmapData = [
 ];
 
 class EmotionWheel extends StatelessWidget {
-  const EmotionWheel({super.key});
+  final FeelingWheelEmotions emotions;
+  final List<MaterialColor> colors;
+
+  const EmotionWheel({super.key, required this.colors, required this.emotions});
 
   @override
   Widget build(BuildContext context) {
-    // var emotionData = [
-    //   [1, 1, "core"],
-    //   [2, 1, "core"],
-    //   [3, 1, "core"],
-    //   [1, 2, "sub"],
-    //   [2, 2, "sub"],
-    //   [3, 2, "sub"],
-    // ];
-
-    // emotionData = [];
-    // for (var core in FeelingWheelEmotions
-    //     .fromJson(loadJsonFromAsset('resouces/emotions.json'))
-    //     .coreEmotions) {
-    //
-    // }
-    // loadJsonFromAsset('assets/data/emotions.json')
-    //     .then((value) => FeelingWheelEmotions.fromJson(value).coreEmotions.asMap().forEach((key, value) {
-    //           emotionData.add([key, value.name]);
-    //         }));
+    var emotionData = [
+      [1, 1, "core"],
+      [2, 1, "core"],
+      [3, 1, "core"],
+      [1, 2, "sub"],
+      [2, 2, "sub"],
+      [3, 2, "sub"],
+    ];
 
     return Column(
       children: [
-        Container(
-          child: Text('Emotion Wheel'),
-        ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(20, 40, 20, 5),
-          child: const Text(
-            'Polar Heatmap of Polygon',
-            style: TextStyle(fontSize: 20),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(top: 10),
+            // width: 350,
+            // height: 300,
+            child: Chart(
+              data: emotionData,
+              variables: {
+                'level': Variable(
+                  accessor: (List datum) => datum[0].toString(),
+                ),
+                'variant': Variable(
+                  accessor: (List datum) => datum[1].toString(),
+                ),
+                'name': Variable(
+                  accessor: (List datum) => datum[2].toString(),
+                ),
+              },
+              elements: [
+                PolygonElement(
+                  shape: ShapeAttr(
+                      value: HeatmapShape(
+                          sector: true,
+                          borderRadius: BorderRadius.horizontal(
+                              left: Radius.circular(10), right: Radius.circular(10)))),
+                  label: LabelAttr(
+                    encoder: (p0) => Label(p0['name']),
+                  ),
+                  color: ColorAttr(
+                    variable: 'variant',
+                    values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
+                    updaters: {
+                      'tap': {false: (color) => color.withAlpha(70)}
+                    },
+                  ),
+                )
+              ],
+              coord: PolarCoord(),
+              selections: {'tap': PointSelection()},
+              // tooltip: TooltipGuide(
+              //   anchor: (_) => Offset.zero,
+              //   align: Alignment.bottomRight,
+              // ),
+            ),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-          alignment: Alignment.centerLeft,
-          child: const Text(
-            '- Tap to select one for tooltip, and others will fade.',
-          ),
-        ),
-        // Container(
-        //   margin: const EdgeInsets.only(top: 10),
-        //   width: 350,
-        //   height: 300,
-        //   child: Chart(
-        //     data: emotionData,
-        //     variables: {
-        //       'level': Variable(
-        //         accessor: (List datum) => datum[0].toString(),
-        //       ),
-        //       'variant': Variable(
-        //         accessor: (List datum) => datum[1].toString(),
-        //       ),
-        //       'name': Variable(
-        //         accessor: (List datum) => datum[2].toString(),
-        //       ),
-        //     },
-        //     elements: [
-        //       PolygonElement(
-        //         shape: ShapeAttr(
-        //             value: HeatmapShape(
-        //                 sector: true,
-        //                 borderRadius:
-        //                     BorderRadius.horizontal(left: Radius.circular(10), right: Radius.circular(10)))),
-        //         label: LabelAttr(
-        //           encoder: (p0) => Label(p0['name']),
-        //         ),
-        //         color: ColorAttr(
-        //           variable: 'variant',
-        //           values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
-        //           updaters: {
-        //             'tap': {false: (color) => color.withAlpha(70)}
-        //           },
-        //         ),
-        //       )
-        //     ],
-        //     coord: PolarCoord(),
-        //     selections: {'tap': PointSelection()},
-        //     // tooltip: TooltipGuide(
-        //     //   anchor: (_) => Offset.zero,
-        //     //   align: Alignment.bottomRight,
-        //     // ),
-        //   ),
-        // ),
       ],
     );
   }

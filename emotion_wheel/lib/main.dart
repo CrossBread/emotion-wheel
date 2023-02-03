@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Emotion Wheel',
       theme: ThemeData.dark(
         useMaterial3: true,
@@ -40,12 +41,11 @@ class _MyAppState extends State<MyApp> {
       ),
       home: _isLoading
           ? SplashPage(
-        onLoad: _initAppState,
-        onLoadComplete: () =>
-            setState(() {
-              _isLoading = false;
-            }),
-      )
+              onLoad: _initAppState,
+              onLoadComplete: () => setState(() {
+                _isLoading = false;
+              }),
+            )
           : HomePage(emotions: _emotions!, emotionColors: emotionColors),
     );
   }

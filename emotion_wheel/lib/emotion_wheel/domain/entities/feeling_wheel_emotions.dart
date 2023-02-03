@@ -10,7 +10,6 @@ class FeelingWheelEmotions {
   });
 
   factory FeelingWheelEmotions.fromJson(dynamic json) {
-    print(json);
     var title = json['title'];
     var subTitle = json['sub_title'];
     var author = json['author'];

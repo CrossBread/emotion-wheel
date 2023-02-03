@@ -28,7 +28,6 @@ class EmotionsExpansionList extends StatelessWidget {
         expandedHeaderPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         children: emotions.coreEmotions.map(
           (core) {
-            print('Size: ${colors.length}');
             var color = colors[core.id - 1];
             return ExpansionPanelRadio(
               backgroundColor: color.shade500,
