@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-Future<dynamic> loadJsonFromAsset(String asset) async {
+Future<Map<String, dynamic>> loadJsonFromAsset(String assetPath) async {
   WidgetsFlutterBinding.ensureInitialized();
-  return await rootBundle.loadString(asset).then((jsonStr) => json.decode(jsonStr));
+  return await rootBundle.loadStructuredData(assetPath, (String s) async => json.decode(s));
 }

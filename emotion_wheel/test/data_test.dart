@@ -8,6 +8,7 @@ main() {
 
       var json = await loadJsonFromAsset(name);
       expect(json, isNotNull);
+      expect(json, isNotEmpty);
     });
   });
 }

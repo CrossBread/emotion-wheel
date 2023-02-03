@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(children: [
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Flexible(
               flex: 1,
               child: SingleChildScrollView(
