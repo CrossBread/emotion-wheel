@@ -55,23 +55,31 @@ const heatmapData = [
   [9, 4, 91]
 ];
 
-class EmotionWheel extends StatelessWidget {
+class EmotionWheel extends StatefulWidget {
   final FeelingWheelEmotions emotions;
   final List<MaterialColor> colors;
 
   const EmotionWheel({super.key, required this.colors, required this.emotions});
 
   @override
-  Widget build(BuildContext context) {
-    var emotionData = [
-      [1, 1, "core"],
-      [2, 1, "core"],
-      [3, 1, "core"],
-      [1, 2, "sub"],
-      [2, 2, "sub"],
-      [3, 2, "sub"],
-    ];
+  State<EmotionWheel> createState() => _EmotionWheelState();
+}
 
+class _EmotionWheelState extends State<EmotionWheel> {
+  var emotionData = [
+    [1, 1, "1"],
+    [2, 1, "2"],
+    [3, 1, "3"],
+    [1, 2, "2"],
+    [2, 2, "2"],
+    [3, 2, "2"],
+    [1, 3, "sub"],
+    [2, 3, "sub"],
+    [3, 3, "sub"],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
@@ -80,30 +88,23 @@ class EmotionWheel extends StatelessWidget {
             // width: 350,
             // height: 300,
             child: Chart(
-              data: emotionData,
+              data: heatmapData,
               variables: {
-                'level': Variable(
+                'name': Variable(
                   accessor: (List datum) => datum[0].toString(),
                 ),
-                'variant': Variable(
+                'day': Variable(
                   accessor: (List datum) => datum[1].toString(),
                 ),
-                'name': Variable(
-                  accessor: (List datum) => datum[2].toString(),
+                'sales': Variable(
+                  accessor: (List datum) => datum[2] as num,
                 ),
               },
               elements: [
                 PolygonElement(
-                  shape: ShapeAttr(
-                      value: HeatmapShape(
-                          sector: true,
-                          borderRadius: BorderRadius.horizontal(
-                              left: Radius.circular(10), right: Radius.circular(10)))),
-                  label: LabelAttr(
-                    encoder: (p0) => Label(p0['name']),
-                  ),
+                  shape: ShapeAttr(value: HeatmapShape(sector: true)),
                   color: ColorAttr(
-                    variable: 'variant',
+                    variable: 'sales',
                     values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
                     updaters: {
                       'tap': {false: (color) => color.withAlpha(70)}
@@ -113,14 +114,51 @@ class EmotionWheel extends StatelessWidget {
               ],
               coord: PolarCoord(),
               selections: {'tap': PointSelection()},
-              // tooltip: TooltipGuide(
-              //   anchor: (_) => Offset.zero,
-              //   align: Alignment.bottomRight,
-              // ),
+              tooltip: TooltipGuide(
+                anchor: (_) => Offset.zero,
+                align: Alignment.bottomRight,
+              ),
             ),
           ),
         ),
       ],
     );
+  }
+
+// label: LabelAttr(
+//   encoder: (p0) => Label(p0['label']),
+// ),
+// color: ColorAttr(
+//   variable: 'depth',
+//   values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
+//   updaters: {
+//     'tap': {false: (color) => color.withAlpha(70)}
+//   },
+// ),
+
+  @override
+  void initState() {
+    super.initState();
+    // sector, depth, label
+    var coreData = widget.emotions.coreEmotions.map((core) => [core.id, 1, core.name]).toList();
+
+    var secondaryData = [];
+    for (var core in widget.emotions.coreEmotions) {
+      secondaryData = core.secondaryEmotions
+          .map(
+            (secondary) => [core.id, secondary.id, secondary.name],
+          )
+          .toList();
+    }
+
+    var tertiaryData = [];
+    for (var core in widget.emotions.coreEmotions) {
+      tertiaryData = core.tertiaryEmotions
+          .map(
+            (tertiary) => [core.id, tertiary.id, tertiary.name],
+          )
+          .toList();
+    }
+    emotionData = [...coreData, ...secondaryData, ...tertiaryData];
   }
 }
