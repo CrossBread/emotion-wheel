@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Emotion Wheel'),
+          title: const Text('Emotion Wheel'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Flexible(flex: 2, child: EmotionWheel()),
+            const Flexible(flex: 2, child: EmotionWheel()),
           ]),
         ),
         // body: Row(
@@ -60,16 +60,16 @@ class HomePage extends StatelessWidget {
     var colors = [Colors.yellow, Colors.green, Colors.blue, Colors.purple, Colors.deepOrange, Colors.orange];
     return Theme(
       data: ThemeData(
-          listTileTheme: ListTileThemeData(textColor: Colors.black),
+          listTileTheme: const ListTileThemeData(textColor: Colors.black),
           textTheme: Theme.of(context).textTheme.copyWith(
                 // headlineMedium: TextStyle(color: Colors.black),
                 // titleLarge: TextStyle(color: Colors.grey.shade900),
-                titleMedium: TextStyle(color: Colors.black),
+                titleMedium: const TextStyle(color: Colors.black),
               )),
       child: ExpansionPanelList.radio(
         expansionCallback: (panelIndex, isExpanded) => print('Expanded'),
         animationDuration: kThemeAnimationDuration * 3,
-        expandedHeaderPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        expandedHeaderPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         children: emotions.coreEmotions.map(
           (core) {
             var color = colors.removeAt(0);
@@ -77,48 +77,60 @@ class HomePage extends StatelessWidget {
               backgroundColor: color.shade500,
               canTapOnHeader: true,
               value: core.id,
-              headerBuilder: (context, isExpanded) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24),
-                child: Text(
-                  core.name,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: color.shade900),
-                ),
-              ),
+              headerBuilder: (context, isExpanded) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24),
+                  child: Text(
+                    core.name,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: color.shade900),
+                  ),
+                );
+              },
               body: SingleChildScrollView(
                   child: ExpansionPanelList.radio(
-                expandedHeaderPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                children: core.secondaryEmotions
-                    .map((secondary) => ExpansionPanelRadio(
-                          backgroundColor: color.shade300,
-                          canTapOnHeader: true,
-                          value: secondary.id,
-                          headerBuilder: (context, isExpanded) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                expandedHeaderPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                children: core.secondaryEmotions.map((secondary) {
+                  return ExpansionPanelRadio(
+                    backgroundColor: color.shade300,
+                    canTapOnHeader: true,
+                    value: secondary.id,
+                    headerBuilder: (context, isExpanded) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      child: Text(
+                        secondary.name,
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(color: color.shade900),
+                      ),
+                    ),
+                    body: ListView(shrinkWrap: true, children: [
+                      Builder(
+                        builder: (context) => ListTile(
+                          tileColor: color.shade100,
+                          textColor: color.shade900,
+                          title: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
                             child: Text(
-                              secondary.name,
-                              style: Theme.of(context).textTheme.titleLarge!.copyWith(color: color.shade900),
+                              core.tertiaryEmotions
+                                  .firstWhere((tertiary) => tertiary.id == secondary.id)
+                                  .name,
+                              // style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
-                          body: ListView(shrinkWrap: true, children: [
-                            ListTile(
-                              tileColor: color.shade100,
-                              textColor: color.shade900,
-                              title: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
-                                child: Text(
-                                  core.tertiaryEmotions
-                                      .firstWhere((tertiary) => tertiary.id == secondary.id)
-                                      .name,
-                                  // style: Theme.of(context).textTheme.titleMedium,
-                                ),
-                              ),
-                              trailing: core.isPositive
-                                  ? Icon(FontAwesomeIcons.arrowTrendDown)
-                                  : Icon(FontAwesomeIcons.arrowTrendUp),
-                            ),
-                          ]),
-                        ))
-                    .toList(),
+                          trailing: core.isPositive
+                              ? const Icon(FontAwesomeIcons.arrowTrendDown)
+                              : const Icon(FontAwesomeIcons.arrowTrendUp),
+                          onTap: () {
+                            // TODO: Make sure graph is visible
+                            // Scrollable.ensureVisible(
+                            //   ?,
+                            //   duration: Duration(seconds: 1),
+                            //   curve: Curves.easeOutQuad,
+                            // );
+                          },
+                        ),
+                      ),
+                    ]),
+                  );
+                }).toList(),
               )),
             );
           },
