@@ -20,6 +20,15 @@ class _MyAppState extends State<MyApp> {
   Map<String, dynamic> json = {};
   FeelingWheelEmotions? _emotions;
 
+  final emotionColors = [
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    Colors.deepOrange,
+    Colors.orange
+  ];
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,12 +40,13 @@ class _MyAppState extends State<MyApp> {
       ),
       home: _isLoading
           ? SplashPage(
-              onLoad: _initAppState,
-              onLoadComplete: () => setState(() {
-                _isLoading = false;
-              }),
-            )
-          : HomePage(_emotions!),
+        onLoad: _initAppState,
+        onLoadComplete: () =>
+            setState(() {
+              _isLoading = false;
+            }),
+      )
+          : HomePage(emotions: _emotions!, emotionColors: emotionColors),
     );
   }
 
