@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ListView(
               children: [
-                DrawerHeader(child: Text('Jeff Neet')),
+                const DrawerHeader(child: Text('Jeff Neet')),
                 Text(
                   'About',
                   style: Theme.of(context).textTheme.labelLarge,
@@ -40,14 +40,12 @@ class HomePage extends StatelessWidget {
                     // style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
-                Container(
-                  child: Text(
-                    emotions.title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+                Text(
+                  emotions.title,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     alignment: Alignment.centerLeft,
@@ -57,13 +55,13 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
                   child: Text(
                     emotions.subTitle,
                     // style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
-                Divider(
+                const Divider(
                   thickness: 1,
                 ),
                 Text(
@@ -81,10 +79,7 @@ class HomePage extends StatelessWidget {
             Flexible(
               flex: 1,
               child: SingleChildScrollView(
-                child: Container(
-                  // width: 300,
-                  child: EmotionsExpansionList(colors: emotionColors, emotions: emotions),
-                ),
+                child: EmotionsExpansionList(colors: emotionColors, emotions: emotions),
               ),
             ),
             Flexible(flex: 2, child: EmotionWheel(colors: emotionColors, emotions: emotions)),

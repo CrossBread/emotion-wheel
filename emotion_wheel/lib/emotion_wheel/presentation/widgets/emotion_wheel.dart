@@ -55,6 +55,10 @@ const heatmapData = [
   [9, 4, 91]
 ];
 
+const _nameField = 'name';
+const _intensityField = 'intensity';
+const _sector = 'sector';
+
 class EmotionWheel extends StatefulWidget {
   final FeelingWheelEmotions emotions;
   final List<MaterialColor> colors;
@@ -80,6 +84,29 @@ class _EmotionWheelState extends State<EmotionWheel> {
 
   @override
   Widget build(BuildContext context) {
+    emotionData = [
+      [1, 1, "core"],
+      [2, 1, "core"],
+      [3, 1, "core"],
+      [1, 2, "sub"],
+      [2, 2, "sub"],
+      [3, 2, "sub"],
+      [4, 2, "sub"],
+      [5, 2, "sub"],
+      [6, 2, "sub"],
+      [7, 2, "sub"],
+      [8, 2, "sub"],
+      [9, 2, "sub"],
+      [1, 3, "ter"],
+      [2, 3, "ter"],
+      [3, 3, "ter"],
+      [4, 3, "ter"],
+      [5, 3, "ter"],
+      [6, 3, "ter"],
+      [7, 3, "ter"],
+      [8, 3, "ter"],
+      [9, 3, "ter"],
+    ];
     return Column(
       children: [
         Expanded(
@@ -88,27 +115,37 @@ class _EmotionWheelState extends State<EmotionWheel> {
             // width: 350,
             // height: 300,
             child: Chart(
-              data: heatmapData,
+              data: emotionData,
               variables: {
-                'name': Variable(
+                _sector: Variable(
                   accessor: (List datum) => datum[0].toString(),
                 ),
-                'day': Variable(
+                _intensityField: Variable(
                   accessor: (List datum) => datum[1].toString(),
                 ),
-                'sales': Variable(
-                  accessor: (List datum) => datum[2] as num,
+                _nameField: Variable(
+                  accessor: (List datum) {
+                    print('Datum $datum');
+                    return datum[2].toString();
+                  },
                 ),
               },
               elements: [
                 PolygonElement(
                   shape: ShapeAttr(value: HeatmapShape(sector: true)),
                   color: ColorAttr(
-                    variable: 'sales',
-                    values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
+                    variable: _intensityField,
+                    values: [
+                      const Color(0xffbae7ff),
+                      const Color(0xff1890ff),
+                      const Color(0xff0050b3),
+                    ],
                     updaters: {
                       'tap': {false: (color) => color.withAlpha(70)}
                     },
+                  ),
+                  label: LabelAttr(
+                    encoder: (p0) => Label(p0[_nameField]),
                   ),
                 )
               ],
@@ -125,9 +162,6 @@ class _EmotionWheelState extends State<EmotionWheel> {
     );
   }
 
-// label: LabelAttr(
-//   encoder: (p0) => Label(p0['label']),
-// ),
 // color: ColorAttr(
 //   variable: 'depth',
 //   values: [const Color(0xffbae7ff), const Color(0xff1890ff), const Color(0xff0050b3)],
@@ -139,14 +173,14 @@ class _EmotionWheelState extends State<EmotionWheel> {
   @override
   void initState() {
     super.initState();
-    // sector, depth, label
+    // sector, depth, name
     var coreData = widget.emotions.coreEmotions.map((core) => [core.id, 1, core.name]).toList();
 
     var secondaryData = [];
     for (var core in widget.emotions.coreEmotions) {
       secondaryData = core.secondaryEmotions
           .map(
-            (secondary) => [core.id, secondary.id, secondary.name],
+            (secondary) => [secondary.id, 2, secondary.name],
           )
           .toList();
     }
@@ -155,7 +189,7 @@ class _EmotionWheelState extends State<EmotionWheel> {
     for (var core in widget.emotions.coreEmotions) {
       tertiaryData = core.tertiaryEmotions
           .map(
-            (tertiary) => [core.id, tertiary.id, tertiary.name],
+            (tertiary) => [tertiary.id, 3, tertiary.name],
           )
           .toList();
     }
