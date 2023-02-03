@@ -84,29 +84,29 @@ class _EmotionWheelState extends State<EmotionWheel> {
 
   @override
   Widget build(BuildContext context) {
-    emotionData = [
-      [1, 1, "core"],
-      [2, 1, "core"],
-      [3, 1, "core"],
-      [1, 2, "sub"],
-      [2, 2, "sub"],
-      [3, 2, "sub"],
-      [4, 2, "sub"],
-      [5, 2, "sub"],
-      [6, 2, "sub"],
-      [7, 2, "sub"],
-      [8, 2, "sub"],
-      [9, 2, "sub"],
-      [1, 3, "ter"],
-      [2, 3, "ter"],
-      [3, 3, "ter"],
-      [4, 3, "ter"],
-      [5, 3, "ter"],
-      [6, 3, "ter"],
-      [7, 3, "ter"],
-      [8, 3, "ter"],
-      [9, 3, "ter"],
-    ];
+    // emotionData = [
+    //   [1, 1, "core"],
+    //   [2, 1, "core"],
+    //   [3, 1, "core"],
+    //   [1, 2, "sub"],
+    //   [2, 2, "sub"],
+    //   [3, 2, "sub"],
+    //   [4, 2, "sub"],
+    //   [5, 2, "sub"],
+    //   [6, 2, "sub"],
+    //   [7, 2, "sub"],
+    //   [8, 2, "sub"],
+    //   [9, 2, "sub"],
+    //   [1, 3, "ter"],
+    //   [2, 3, "ter"],
+    //   [3, 3, "ter"],
+    //   [4, 3, "ter"],
+    //   [5, 3, "ter"],
+    //   [6, 3, "ter"],
+    //   [7, 3, "ter"],
+    //   [8, 3, "ter"],
+    //   [9, 3, "ter"],
+    // ];
     return Column(
       children: [
         Expanded(
@@ -178,21 +178,22 @@ class _EmotionWheelState extends State<EmotionWheel> {
 
     var secondaryData = [];
     for (var core in widget.emotions.coreEmotions) {
-      secondaryData = core.secondaryEmotions
-          .map(
-            (secondary) => [secondary.id, 2, secondary.name],
-          )
-          .toList();
+      for (var secondary in core.secondaryEmotions) {
+        var secondarySector = ((core.id - 1) * widget.emotions.coreEmotions.length) + secondary.id;
+        secondaryData.add([secondarySector, 2, secondary.name]);
+      }
     }
 
     var tertiaryData = [];
     for (var core in widget.emotions.coreEmotions) {
-      tertiaryData = core.tertiaryEmotions
-          .map(
-            (tertiary) => [tertiary.id, 3, tertiary.name],
-          )
-          .toList();
+      for (var tertiary in core.tertiaryEmotions) {
+        var tertiarySector = ((core.id - 1) * widget.emotions.coreEmotions.length) + tertiary.id;
+        print(tertiarySector);
+        tertiaryData.add([tertiarySector, 3, tertiary.name]);
+      }
     }
     emotionData = [...coreData, ...secondaryData, ...tertiaryData];
+    print('${coreData.length} + ${secondaryData.length} + ${tertiaryData.length} = ${emotionData.length}');
+    print('should be 6 + 36 + 36 = 78');
   }
 }
