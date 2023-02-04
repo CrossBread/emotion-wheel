@@ -23,6 +23,20 @@ class HomePage extends StatelessWidget {
             })
           ],
         ),
+        drawer: Drawer(
+            child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              child: Text(
+                'Browse Emotions',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+            Divider(),
+            EmotionsExpansionList(colors: emotionColors, emotions: emotions),
+          ],
+        )),
         endDrawer: Drawer(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -76,12 +90,6 @@ class HomePage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Flexible(
-              flex: 1,
-              child: SingleChildScrollView(
-                child: EmotionsExpansionList(colors: emotionColors, emotions: emotions),
-              ),
-            ),
             Flexible(flex: 2, child: EmotionWheel(colors: emotionColors, emotions: emotions)),
           ]),
         ),
