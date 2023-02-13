@@ -132,7 +132,10 @@ class ChoiceScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       children: [
         Center(
-          child: Text(titleText, style: Theme.of(context).textTheme.headlineMedium),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+            child: Text(titleText, style: Theme.of(context).textTheme.headlineMedium),
+          ),
         ),
         Expanded(
           child: Column(
@@ -141,7 +144,10 @@ class ChoiceScreen extends StatelessWidget {
             children: [
               ...choices.map((label) {
                 return Expanded(
-                    child: ElevatedButton(onPressed: () => onChoiceMade(label), child: Text(label)));
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(onPressed: () => onChoiceMade(label), child: Text(label)),
+                ));
               }).toList(),
             ],
           ),
