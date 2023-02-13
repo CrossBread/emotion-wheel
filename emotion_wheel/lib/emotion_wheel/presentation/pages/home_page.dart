@@ -27,13 +27,13 @@ class HomePage extends StatelessWidget {
             child: ListView(
           children: [
             Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 'Browse Emotions',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
-            Divider(),
+            const Divider(),
             EmotionsExpansionList(colors: emotionColors, emotions: emotions),
           ],
         )),
