@@ -1,4 +1,6 @@
+import 'package:emotion_wheel/emotion_wheel/domain/entities/core_emotion.dart';
 import 'package:emotion_wheel/emotion_wheel/domain/entities/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/emotion_wheel/presentation/widgets/emotion_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class EmotionQuiz extends StatefulWidget {
@@ -16,7 +18,9 @@ class _EmotionQuizState extends State<EmotionQuiz> {
 
   @override
   Widget build(BuildContext context) {
-    return const GoodBadScreen();
+    return Navigator(
+      pages: [MaterialPage(child: GoodBadScreen(widget.emotions, widget.colors))],
+    );
   }
 
   @override
@@ -33,18 +37,24 @@ class _EmotionQuizState extends State<EmotionQuiz> {
 class GoodBadScreen extends StatelessWidget {
   static const List<String> choices = ['Good', 'Bad'];
 
-  const GoodBadScreen({super.key});
+  final FeelingWheelEmotions emotions;
+  final List<MaterialColor> colors;
+
+  const GoodBadScreen(this.emotions, this.colors, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChoiceScreen(
+      titleText: 'Hello.',
+      promptText: 'How are you feeling right now?',
       choices: choices,
-      titleText: 'How are you feeling right now?',
       onChoiceMade: (choice) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => TertiaryScreen(),
+              builder: (context) => CoreScreen(
+                  emotions.coreEmotions.where((coreEmotion) => coreEmotion.isPositive == (choice == 'Good')),
+                  colors),
             ));
       },
     );
@@ -52,20 +62,23 @@ class GoodBadScreen extends StatelessWidget {
 }
 
 class CoreScreen extends StatelessWidget {
-  static const List<String> choices = ['Good', 'Bad'];
+  final Iterable<CoreEmotion> coreEmotions;
+  final List<MaterialColor> colors;
 
-  const CoreScreen({super.key});
+  const CoreScreen(this.coreEmotions, this.colors, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChoiceScreen(
-      choices: choices,
-      titleText: 'How are you feeling right now?',
+      titleText: coreEmotions.first.isPositive ? 'Good' : 'Bad',
+      promptText: 'Which way are you leaning?',
+      choices: coreEmotions.map((e) => e.name).toList(),
       onChoiceMade: (choice) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => GoodBadScreen(),
+              builder: (context) => SecondaryScreen(
+                  coreEmotions.firstWhere((coreEmotion) => coreEmotion.name == choice), colors),
             ));
       },
     );
@@ -73,41 +86,77 @@ class CoreScreen extends StatelessWidget {
 }
 
 class SecondaryScreen extends StatelessWidget {
-  static const List<String> choices = ['Good', 'Bad'];
+  final CoreEmotion coreEmotion;
+  final List<MaterialColor> colors;
 
-  const SecondaryScreen({super.key});
+  const SecondaryScreen(this.coreEmotion, this.colors, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    var coreEmotionChoice = 'No, I just feel ${coreEmotion.name}';
     return ChoiceScreen(
-      choices: choices,
-      titleText: 'How are you feeling right now?',
+      titleText: coreEmotion.name,
+      promptText: "Can you name a more specific feeling?",
+      choices: [
+        ...coreEmotion.secondaryEmotions.map((e) => e.name).toList(),
+        coreEmotionChoice,
+      ],
       onChoiceMade: (choice) {
-        Navigator.push(
+        if (choice == coreEmotionChoice) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EmotionDetailScreen(coreEmotion.name),
+              ));
+        } else {
+          var choiceIndex =
+              coreEmotion.secondaryEmotions.indexWhere((secondaryEmotion) => secondaryEmotion.name == choice);
+          Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => GoodBadScreen(),
-            ));
+              builder: (context) => TertiaryScreen(
+                coreEmotion,
+                choiceIndex,
+                colors,
+              ),
+            ),
+          );
+        }
       },
     );
   }
 }
 
 class TertiaryScreen extends StatelessWidget {
-  static const List<String> choices = ['Good', 'Bad'];
+  final CoreEmotion coreEmotion;
+  final int choiceIndex;
+  final List<MaterialColor> colors;
 
-  const TertiaryScreen({super.key});
+  const TertiaryScreen(this.coreEmotion, this.choiceIndex, this.colors, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    var secondaryEmotion = coreEmotion.secondaryEmotions[choiceIndex];
+    var tertiaryEmotion = coreEmotion.tertiaryEmotions[choiceIndex];
+
+    var choiceNames = [tertiaryEmotion.name, secondaryEmotion.name, coreEmotion.name];
+    var choices = [
+      'Yes, I feel ${choiceNames[0]}]',
+      'No, I feel ${choiceNames[1]}',
+      'Actually, I just feel ${choiceNames[2]}',
+    ];
+
     return ChoiceScreen(
+      titleText: coreEmotion.secondaryEmotions[choiceIndex].name,
+      promptText: 'Is ${tertiaryEmotion.name} an even closer match?',
       choices: choices,
-      titleText: 'How are you feeling right now?',
       onChoiceMade: (choice) {
+        String choiceName = choiceNames[choices.indexOf(choice)];
+
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => GoodBadScreen(),
+              builder: (context) => EmotionDetailScreen(choiceName),
             ));
       },
     );
@@ -115,16 +164,18 @@ class TertiaryScreen extends StatelessWidget {
 }
 
 class ChoiceScreen extends StatelessWidget {
+  final String titleText;
+  final String promptText;
+  final List<String> choices;
+  final Null Function(String choice) onChoiceMade;
+
   const ChoiceScreen({
     super.key,
     required this.choices,
     required this.onChoiceMade,
     required this.titleText,
+    required this.promptText,
   });
-
-  final List<String> choices;
-  final Null Function(String choice) onChoiceMade;
-  final String titleText;
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +185,14 @@ class ChoiceScreen extends StatelessWidget {
         Center(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
-            child: Text(titleText, style: Theme.of(context).textTheme.headlineMedium),
+            child: Hero(
+                tag: titleText, child: Text(titleText, style: Theme.of(context).textTheme.headlineLarge)),
+          ),
+        ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 16),
+            child: Text(promptText, style: Theme.of(context).textTheme.headlineMedium),
           ),
         ),
         Expanded(
@@ -146,7 +204,8 @@ class ChoiceScreen extends StatelessWidget {
                 return Expanded(
                     child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(onPressed: () => onChoiceMade(label), child: Text(label)),
+                  child: ElevatedButton(
+                      onPressed: () => onChoiceMade(label), child: Hero(tag: label, child: Text(label))),
                 ));
               }).toList(),
             ],
