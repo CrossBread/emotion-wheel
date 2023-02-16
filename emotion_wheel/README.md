@@ -1,16 +1,45 @@
 # emotion_wheel
 
-Tool for self emotionl awareness
+Tool for self emotional awareness
 
-## Getting Started
+## A Research Based Approach
 
-This project is a starting point for a Flutter application.
+This project is based on research from Gloria Willcox.
 
-A few resources to get you started if this is your first Flutter project:
+Citation: "Gloria Willcox (1982) The Feeling Wheel, Transactional Analysis Journal, 12:4, 274-276,
+DOI: 10.1177/036215378201200411"
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The goal is to provide a simple light weight tool for identifying an emotion you are feeling, but
+have trouble putting into words.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Flutter Dev
+
+From a Flutter Development perspective, it also provides a simple real-world app to
+explore state management in Flutter using vanilla arguments, Provider, Riverpod, and BLoC.
+
+- [Flutter Docs: List of state management approaches](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options)
+
+App Structure
+---
+Quiz Flow
+---
+
+```mermaid
+flowchart TD
+A[Home] --> q1{How you feel, or want to feel?}
+q1 --> |Good, Positive Emotions| q2{Which way are you leaning?}
+q1 --> |Bad, Negative Emotions| q2
+q1 --> |Want to Feel, Positive Emotions| q2
+q2 --> core[Core Emotion]
+subgraph quiz[Quiz]
+core -...-> detail
+core ==> |More Specific?| secondary[Secondary Emotions]
+secondary ==> |More Specific?| F[Tertiary Emotion]
+secondary -..-> detail
+F ==> detail([Emotion Detail])
+end
+detail -.-> H(Opposite Emotion)
+
+```
+
+
