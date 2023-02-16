@@ -9,8 +9,8 @@ This project is based on research from Gloria Willcox.
 Citation: "Gloria Willcox (1982) The Feeling Wheel, Transactional Analysis Journal, 12:4, 274-276,
 DOI: 10.1177/036215378201200411"
 
-The goal is to provide a simple light weight tool for identifying an emotion you are feeling, but
-have trouble putting into words.
+The goal is to provide a simple light-weight tool for identifying an emotion you are feeling or
+would like to feel, but have trouble putting into words.
 
 ## Flutter Dev
 
