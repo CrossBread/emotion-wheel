@@ -19,6 +19,7 @@ class _EmotionQuizState extends State<EmotionQuiz> {
   @override
   Widget build(BuildContext context) {
     return Navigator(
+      // TODO: Replace with go router at the app level.
       pages: [MaterialPage(child: GoodBadScreen(widget.emotions, widget.colors))],
     );
   }
