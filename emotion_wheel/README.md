@@ -19,10 +19,16 @@ explore state management in Flutter using vanilla arguments, Provider, Riverpod,
 
 - [Flutter Docs: List of state management approaches](https://docs.flutter.dev/development/data-and-backend/state-mgmt/options)
 
-App Structure
+### BLoC
+
+[Architecture Sequence Diagram](lib/bloc/bloc_architecture.md)
+
+
 ---
-Quiz Flow
----
+
+## App Structure
+
+### Quiz Flow
 
 ```mermaid
 flowchart TD
