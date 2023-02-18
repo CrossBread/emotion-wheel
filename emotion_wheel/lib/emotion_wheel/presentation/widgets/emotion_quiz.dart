@@ -1,5 +1,5 @@
-import 'package:emotion_wheel/emotion_wheel/domain/entities/core_emotion.dart';
-import 'package:emotion_wheel/emotion_wheel/domain/entities/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/emotion_wheel/data/models/core_emotion.dart';
+import 'package:emotion_wheel/emotion_wheel/data/models/feeling_wheel_emotions.dart';
 import 'package:emotion_wheel/emotion_wheel/presentation/widgets/emotion_detail_screen.dart';
 import 'package:flutter/material.dart';
 

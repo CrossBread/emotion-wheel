@@ -1,4 +1,4 @@
-import 'package:emotion_wheel/emotion_wheel/domain/entities/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/emotion_wheel/data/models/feeling_wheel_emotions.dart';
 import 'package:emotion_wheel/emotion_wheel/flutter_utils.dart';
 import 'package:emotion_wheel/emotion_wheel/presentation/pages/home_page.dart';
 import 'package:emotion_wheel/emotion_wheel/presentation/pages/splash_page.dart';

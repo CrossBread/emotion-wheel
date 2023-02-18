@@ -1,4 +1,4 @@
-import 'core_emotion.dart';
+import '../../data/models/core_emotion.dart';
 
 class FeelingWheelEmotions {
   FeelingWheelEmotions({
