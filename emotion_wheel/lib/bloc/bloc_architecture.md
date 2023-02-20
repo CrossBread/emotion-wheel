@@ -9,7 +9,7 @@ See: [The Best Flutter Bloc Complete Course](https://www.youtube.com/watch?v=THC
 sequenceDiagram
 
     autonumber
-    Note over User: HI
+    Note over User: User opens app
     %% Boxes Require Mermaid 9.4.0 / Android Studio Giraffe
     %% box Presentation
         actor User
@@ -19,6 +19,8 @@ sequenceDiagram
     %% end
     
     Note over UI: State: InitialStart
+    UI->>User: display InitialState 
+    
     Note over User: User wants to<br/>sync history.
     User->>UI: Taps Refresh
     
