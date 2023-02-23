@@ -37,16 +37,20 @@ jobs:
         run: |
           pwd
           find . -type f -name pubspec.yaml
-          find . -type d -name web
-
       - name: Get dependencies
+        # If this step fails because the project root was not in the working dir, check the output of the
+        # "Check Working Directory Contains root pubspec.yaml" step to help troubleshoot
         run: flutter pub get
 
       - name: Clear out any old build files
         run: flutter clean
 
       - name: Start Web Release Build
-        run: flutter build web --release --base-href /emotion_wheel/
+        # --base-href is needed so that flutter knows how to adjust resource paths (see web/index.html)
+        # The base href needs to match the name of the repository
+        # since the page will be hosted at username.github.io/base-href/
+        # Note this is not necessarily the same as the project name so double check my_project vs my-project
+        run: flutter build web --release --base-href /emotion-wheel/
 
       - name: Check Working Directory Contains build/web
         run: |
@@ -57,6 +61,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: web-release
+          # This path is from the Working Directory to the build/web dir and may contain the module name
+          # if it is in a sub directory and not the root of the repo.  Check the output of the
+          # "Check Working Directory Contains build/web" step to help troubleshoot
           path: ./emotion_wheel/build/web
 
   deploy:
