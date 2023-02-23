@@ -43,8 +43,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: web-release
-          # TODO: This may need to be ./emotion_wheel/build/web if the flutter project is not in the root dir
-          path: ./build/web
+          # TODO: This may need to be ./[flutter_project]/build/web if the flutter project is not in the root dir
+          path: ./emotion_wheel/build/web
 
   deploy:
     name: Deploy Web Build
