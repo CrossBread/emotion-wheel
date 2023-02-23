@@ -33,8 +33,12 @@ jobs:
           cache: true
       - run: flutter --version
 
-      - name: PWD
-        run: pwd
+      - name: Check Working Directory and Web Release Artifact Path
+        run: |
+        find . -type f -name pubspec.yaml
+        pwd
+        find . -type d -name web
+
 
       - name: Get dependencies
         run: flutter pub get
@@ -49,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: web-release
-          path: ./build/web
+          path: ./emotion_wheel/build/web
 
   deploy:
     name: Deploy Web Build
