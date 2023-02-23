@@ -33,6 +33,9 @@ jobs:
           cache: true
       - run: flutter --version
 
+      - name: PWD
+        run: pwd
+
       - name: Get dependencies
         run: flutter pub get
 
