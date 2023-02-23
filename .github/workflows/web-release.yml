@@ -35,9 +35,9 @@ jobs:
 
       - name: Check Working Directory and Web Release Artifact Path
         run: |
-        find . -type f -name pubspec.yaml
-        pwd
-        find . -type d -name web
+          find . -type f -name pubspec.yaml
+          pwd
+          find . -type d -name web
 
 
       - name: Get dependencies
