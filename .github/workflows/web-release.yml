@@ -33,12 +33,11 @@ jobs:
           cache: true
       - run: flutter --version
 
-      - name: Check Working Directory and Web Release Artifact Path
+      - name: Check Working Directory Contains root pubspec.yaml
         run: |
-          find . -type f -name pubspec.yaml
           pwd
+          find . -type f -name pubspec.yaml
           find . -type d -name web
-
 
       - name: Get dependencies
         run: flutter pub get
@@ -48,6 +47,11 @@ jobs:
 
       - name: Start Web Release Build
         run: flutter build web --release --base-href /emotion_wheel/
+
+      - name: Check Working Directory Contains build/web
+        run: |
+          pwd
+          find . -type d -name web
 
       - name: Upload Web Build Files
         uses: actions/upload-artifact@v2
