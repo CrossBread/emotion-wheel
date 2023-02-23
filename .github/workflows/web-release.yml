@@ -13,6 +13,9 @@ jobs:
   build:
     name: Create Web Build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./emotion_wheel/
     steps:
       - uses: actions/checkout@v3
       # Don't need dart-lang since Flutter bundles dart
@@ -43,8 +46,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: web-release
-          # TODO: This may need to be ./[flutter_project]/build/web if the flutter project is not in the root dir
-          path: ./emotion_wheel/build/web
+          path: ./build/web
 
   deploy:
     name: Deploy Web Build
