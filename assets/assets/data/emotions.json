@@ -1,0 +1,350 @@
+{
+  "title": "The Feeling Wheel",
+  "sub_title": "A Tool for Expanding Awareness of Emotions and Increasing Spontaneity and Intimacy",
+  "author": "Gloria Willcox",
+  "citation": "Gloria Willcox (1982) The Feeling Wheel, Transactional Analysis Journal, 12:4, 274-276, DOI: 10.1177/036215378201200411",
+  "core_emotions": [
+    {
+      "id": 1,
+      "name": "Joyful",
+      "isPositive": true,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Excited"
+        },
+        {
+          "id": 2,
+          "name": "Sexy"
+        },
+        {
+          "id": 3,
+          "name": "Energetic"
+        },
+        {
+          "id": 4,
+          "name": "Playful"
+        },
+        {
+          "id": 5,
+          "name": "Creative"
+        },
+        {
+          "id": 6,
+          "name": "Aware"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Daring"
+        },
+        {
+          "id": 2,
+          "name": "Fascinating"
+        },
+        {
+          "id": 3,
+          "name": "Stimulating"
+        },
+        {
+          "id": 4,
+          "name": "Amused"
+        },
+        {
+          "id": 5,
+          "name": "Extravagant"
+        },
+        {
+          "id": 6,
+          "name": "Delightful"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Powerful",
+      "isPositive": true,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Proud"
+        },
+        {
+          "id": 2,
+          "name": "Respected"
+        },
+        {
+          "id": 3,
+          "name": "Appreciated"
+        },
+        {
+          "id": 4,
+          "name": "Hopeful"
+        },
+        {
+          "id": 5,
+          "name": "Important"
+        },
+        {
+          "id": 6,
+          "name": "Faithful"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Cheerful"
+        },
+        {
+          "id": 2,
+          "name": "Satisfied"
+        },
+        {
+          "id": 3,
+          "name": "Valuable"
+        },
+        {
+          "id": 4,
+          "name": "Worthwhile"
+        },
+        {
+          "id": 5,
+          "name": "Intelligent"
+        },
+        {
+          "id": 6,
+          "name": "Confident"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Peaceful",
+      "isPositive": true,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Nurturing"
+        },
+        {
+          "id": 2,
+          "name": "Trusting"
+        },
+        {
+          "id": 3,
+          "name": "Loving"
+        },
+        {
+          "id": 4,
+          "name": "Intimate"
+        },
+        {
+          "id": 5,
+          "name": "Thoughtful"
+        },
+        {
+          "id": 6,
+          "name": "Content"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Thankful"
+        },
+        {
+          "id": 2,
+          "name": "Sentimental"
+        },
+        {
+          "id": 3,
+          "name": "Serene"
+        },
+        {
+          "id": 4,
+          "name": "Responsive"
+        },
+        {
+          "id": 5,
+          "name": "Relaxed"
+        },
+        {
+          "id": 6,
+          "name": "Pensive"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Sad",
+      "isPositive": false,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Sleepy"
+        },
+        {
+          "id": 2,
+          "name": "Bored"
+        },
+        {
+          "id": 3,
+          "name": "Lonely"
+        },
+        {
+          "id": 4,
+          "name": "Depressed"
+        },
+        {
+          "id": 5,
+          "name": "Ashamed"
+        },
+        {
+          "id": 6,
+          "name": "Guilty"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Apathetic"
+        },
+        {
+          "id": 2,
+          "name": "Inferior"
+        },
+        {
+          "id": 3,
+          "name": "Inadequate"
+        },
+        {
+          "id": 4,
+          "name": "Miserable"
+        },
+        {
+          "id": 5,
+          "name": "Stupid"
+        },
+        {
+          "id": 6,
+          "name": "Bashful"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Mad",
+      "isPositive": false,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Hurt"
+        },
+        {
+          "id": 2,
+          "name": "Hostile"
+        },
+        {
+          "id": 3,
+          "name": "Angry"
+        },
+        {
+          "id": 4,
+          "name": "Rage"
+        },
+        {
+          "id": 5,
+          "name": "Hateful"
+        },
+        {
+          "id": 6,
+          "name": "Critical"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Jealous"
+        },
+        {
+          "id": 2,
+          "name": "Selfish"
+        },
+        {
+          "id": 3,
+          "name": "Frustrated"
+        },
+        {
+          "id": 4,
+          "name": "Furious"
+        },
+        {
+          "id": 5,
+          "name": "Irritated"
+        },
+        {
+          "id": 6,
+          "name": "Skeptical"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Scared",
+      "isPositive": false,
+      "secondary_emotions": [
+        {
+          "id": 1,
+          "name": "Rejected"
+        },
+        {
+          "id": 2,
+          "name": "Confused"
+        },
+        {
+          "id": 3,
+          "name": "Helpless"
+        },
+        {
+          "id": 4,
+          "name": "Submissive"
+        },
+        {
+          "id": 5,
+          "name": "Insecure"
+        },
+        {
+          "id": 6,
+          "name": "Anxious"
+        }
+      ],
+      "tertiary_emotions": [
+        {
+          "id": 1,
+          "name": "Bewildered"
+        },
+        {
+          "id": 2,
+          "name": "Discouraged"
+        },
+        {
+          "id": 3,
+          "name": "Insignificant"
+        },
+        {
+          "id": 4,
+          "name": "Weak"
+        },
+        {
+          "id": 5,
+          "name": "Foolish"
+        },
+        {
+          "id": 6,
+          "name": "Embarrassed"
+        }
+      ]
+    }
+  ]
+}
