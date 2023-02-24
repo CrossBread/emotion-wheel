@@ -1,4 +1,4 @@
-import '../../data/models/core_emotion.dart';
+import 'package:emotion_wheel/common/data/models/core_emotion.dart';
 
 class FeelingWheelEmotions {
   FeelingWheelEmotions({

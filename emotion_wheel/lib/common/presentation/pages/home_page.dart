@@ -1,6 +1,6 @@
-import 'package:emotion_wheel/emotion_wheel/data/models/feeling_wheel_emotions.dart';
-import 'package:emotion_wheel/emotion_wheel/presentation/pages/emotions_expansion_list.dart';
-import 'package:emotion_wheel/emotion_wheel/presentation/widgets/emotion_quiz.dart';
+import 'package:emotion_wheel/common/data/models/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/common/presentation/widgets/emotions_expansion_list.dart';
+import 'package:emotion_wheel/common/presentation/widgets/emotion_quiz.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -90,7 +90,9 @@ class HomePage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Expanded(child: EmotionQuiz(colors: emotionColors, emotions: emotions)),
+            Expanded(
+              child: EmotionQuiz(colors: emotionColors, emotions: emotions),
+            ),
             // Flexible(flex: 2, child: EmotionWheel(colors: emotionColors, emotions: emotions)),
           ]),
         ),

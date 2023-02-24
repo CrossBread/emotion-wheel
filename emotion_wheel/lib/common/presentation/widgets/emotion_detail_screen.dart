@@ -1,5 +1,5 @@
-import 'package:emotion_wheel/emotion_wheel/presentation/widgets/emotion_detail_screen_card.dart';
-import 'package:emotion_wheel/emotion_wheel/presentation/widgets/lorem_ipsum_text.dart';
+import 'package:emotion_wheel/common/presentation/widgets/emotion_detail_screen_card.dart';
+import 'package:emotion_wheel/common/presentation/widgets/lorem_ipsum_text.dart';
 import 'package:flutter/material.dart';
 
 class EmotionDetailScreen extends StatelessWidget {

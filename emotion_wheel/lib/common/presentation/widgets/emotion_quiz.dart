@@ -1,6 +1,6 @@
-import 'package:emotion_wheel/emotion_wheel/data/models/core_emotion.dart';
-import 'package:emotion_wheel/emotion_wheel/data/models/feeling_wheel_emotions.dart';
-import 'package:emotion_wheel/emotion_wheel/presentation/widgets/emotion_detail_screen.dart';
+import 'package:emotion_wheel/common/data/models/core_emotion.dart';
+import 'package:emotion_wheel/common/data/models/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/common/presentation/widgets/emotion_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class EmotionQuiz extends StatefulWidget {
@@ -142,7 +142,7 @@ class TertiaryScreen extends StatelessWidget {
 
     var choiceNames = [tertiaryEmotion.name, secondaryEmotion.name, coreEmotion.name];
     var choices = [
-      'Yes, I feel ${choiceNames[0]}]',
+      'Yes, I feel ${choiceNames[0]}',
       'No, I feel ${choiceNames[1]}',
       'Actually, I just feel ${choiceNames[2]}',
     ];

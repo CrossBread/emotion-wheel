@@ -1,4 +1,4 @@
-import 'package:emotion_wheel/emotion_wheel/data/models/feeling_wheel_emotions.dart';
+import 'package:emotion_wheel/common/data/models/feeling_wheel_emotions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
