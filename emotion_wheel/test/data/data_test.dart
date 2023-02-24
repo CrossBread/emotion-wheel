@@ -1,4 +1,4 @@
-import 'package:emotion_wheel/emotion_wheel/flutter_utils.dart';
+import 'package:emotion_wheel/common/flutter_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
